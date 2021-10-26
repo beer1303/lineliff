@@ -86,64 +86,54 @@
               dark
               class="w-100 mt-10 my-btn"
               @click="next"
-              >Next</v-btn
-            >
+              >Next
+            </v-btn>
           </v-form>
         </v-col>
       </v-row>
     </v-container>
-    <v-dialog
-      v-model="dialog"
-      max-width="290"
-    >
-      <v-card>
-        <v-card-title>Form is error</v-card-title>
-        <v-card-text v-html="errorMsg"></v-card-text>
-      </v-card>
-    </v-dialog>
   </div>
 </template>
 <script>
 export default {
   data() {
     return {
-      dialog: false,
-      errorMsg: '',
       form: {
-        firsname: '',
-        lastname: '',
-        gender: 1,
-      }
-    }
+        firsname: this.$store.getters.getRegister.firsname,
+        lastname: this.$store.getters.getRegister.lastname,
+        gender: this.$store.getters.getRegister.gender
+      },
+    };
   },
   methods: {
     chooseGender(gender) {
-      this.form.gender = gender
+      this.form.gender = gender;
     },
     validdate() {
-      let validated = true
-      const errors = []
+      let validated = true;
+      const errors = [];
 
-      const validatorField =[
-        'firsname',
-        'lastname'
-      ]
+      const validatorField = ["firsname", "lastname"];
       validatorField.forEach((field) => {
-        if(this.form[field] == ''){
-          validated = false
-          errors.push(`${field} can not be null`)
+        if (this.form[field] == "") {
+          validated = false;
+          errors.push(`${field} can not be null`);
         }
-      })
-      if(!validated){
-        this.errorMsg = errors.map((error) => error+'<br/>').join('')
-        this.dialog = true
+      });
+      if (!validated) {
+        this.$store.dispatch("setDialog", {
+          isShow: true,
+          title: "Form is error",
+          message: errors.map((error) => error + "<br/>").join(""),
+        });
       }
 
-      return validated
+      return validated;
     },
 
     next() {
       if (this.validdate()) {
+        this.$store.dispatch("setRegister", this.form);
         this.$router.push("/register/register2");
       }
     },
