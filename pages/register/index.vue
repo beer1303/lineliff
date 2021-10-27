@@ -101,7 +101,7 @@ export default {
       form: {
         firsname: this.$store.getters.getRegister.firsname,
         lastname: this.$store.getters.getRegister.lastname,
-        gender: this.$store.getters.getRegister.gender
+        gender: this.$store.getters.getRegister.gender,
       },
     };
   },
@@ -127,10 +127,8 @@ export default {
           message: errors.map((error) => error + "<br/>").join(""),
         });
       }
-
       return validated;
     },
-
     next() {
       if (this.validdate()) {
         this.$store.dispatch("setRegister", this.form);

@@ -77,6 +77,12 @@ export default {
   height: auto !important;
   padding: 10px !important;
   font-weight: bold;
+  min-height: 50px;
+  &.outlined {
+    border: 1px solid #1a56be;
+    border-radius: 28px;
+    line-height: normal;
+  }
 }
 .set-birthday {
   position: relative;
@@ -84,5 +90,20 @@ export default {
     position: absolute;
     right: 0;
   }
+}
+.set-padding {
+  padding: 0 10px;
+}
+.more-deteil {
+  font-size: 12px;
+  font-weight: bold;
+  color: #1a56be;
+  border-radius: 25px;
+  padding: 10px 20px;
+  background: #fff;
+  display: inline;
+  position: absolute;
+  bottom: 11px;
+  right: 11px;
 }
 </style>

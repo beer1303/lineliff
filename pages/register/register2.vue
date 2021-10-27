@@ -54,7 +54,11 @@
                 <v-btn text color="primary" @click="modal = false">
                   Cancel
                 </v-btn>
-                <v-btn text color="primary" @click="$refs.dialog.save(date)">
+                <v-btn
+                  text
+                  color="primary"
+                  @click="$refs.dialog.save(form.birthday)"
+                >
                   OK
                 </v-btn>
               </v-date-picker>
@@ -92,61 +96,104 @@
 </template>
 
 <script>
-const REGEX_EMAIL =/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-const REGEX_PHONE = /^[0]([0-9]{9})*$/
-const REGEX_NUMBER = /^[0-9]*$/
+const REGEX_EMAIL =
+  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const REGEX_PHONE = /^[0]([0-9]{9})*$/;
+const REGEX_NUMBER = /^[0-9]*$/;
 export default {
   data() {
     return {
       form: {
-        email: '',
-        phone: '',
-        birthday: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
-          .toISOString()
-          .substr(0, 10),
-        company: '',
-        position: '',
+        email: this.$store.getters.getRegister.email,
+        phone: this.$store.getters.getRegister.phone,
+        birthday: this.$store.getters.getRegister.birthday,
+        company: this.$store.getters.getRegister.company,
+        position: this.$store.getters.getRegister.position,
       },
       modal: false,
+      emailvaldated: false,
+      phonevaldated: false,
       emailRukes: [(value) => this.emailValidator(value)],
       phoneRukes: [(value) => this.phoneValidator(value)],
     };
   },
   methods: {
     phoneValidator(value) {
-       if (value == '') {
+      this.phonevaldated = false;
+      if (value == "") {
         return "required";
       }
-      if (REGEX_PHONE.test(value)) {
+      if (REGEX_PHONE.test(value) && value.length == 10) {
+        this.phonevaldated = true;
         return true;
       }
-      return "please input phonenumber";
+      return "Please Input PhoneNumber";
     },
     emailValidator(value) {
-      if (value == '') {
+      this.emailvaldated = false;
+      if (value == "") {
         return "required";
       }
       if (REGEX_EMAIL.test(value)) {
+        this.emailvaldated = true;
         return true;
       }
-      return "email is Invalid";
+      return "Email is Invalid";
     },
-    onlyNumber(event, max){
-      if(event.target.value.length == 0){
-        if(event.key != 0){
-          return event.preventDefault()
+    onlyNumber(event, max) {
+      if (event.target.value.length == 0) {
+        if (event.key != 0) {
+          return event.preventDefault();
         }
-      }else{
-          if(!REGEX_NUMBER.test(event.key) || event.target.value.length == max){
-          return event.preventDefault()
+      } else {
+        if (!REGEX_NUMBER.test(event.key) || event.target.value.length == max) {
+          return event.preventDefault();
         }
       }
+    },
+    validdate() {
+      let validated = true;
+      const errors = [];
+
+      const validatorField = ["email", "phone", "company", "position"];
+      validatorField.forEach((field) => {
+        if (this.form[field] == "") {
+          validated = false;
+          errors.push(`${field} can not be null`);
+        }
+      });
+      if (!this.emailvaldated) {
+        validated = false;
+        errors.push(`Email is Invalid`);
+      }
+      if (!this.phonevaldated) {
+        validated = false;
+        errors.push(`Please Input PhoneNumber`);
+      }
+      if (!validated) {
+        this.$store.dispatch("setDialog", {
+          isShow: true,
+          title: "Form is error",
+          message: errors.map((error) => error + "<br/>").join(""),
+        });
+      }
+      return validated;
     },
     back() {
       this.$router.push("/register");
     },
     register() {
-      console.log("Register");
+      if (this.validdate()) {
+        this.$store.dispatch("setRegister", this.form);
+        this.$axios
+          .patch(
+            `https://lineliff-nuxt-default-rtdb.asia-southeast1.firebasedatabase.app/line:001/members/profile.json`,
+            this.$store.getters.getRegister
+          )
+          .then((res) => {
+            this.$router.push("/register/done");
+          });
+      }
     },
   },
 };
