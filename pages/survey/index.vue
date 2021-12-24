@@ -53,7 +53,7 @@ export default {
       this.$store.dispatch("setSurvey", this.form);
       this.$axios
         .patch(
-          `https://lineliff-nuxt-default-rtdb.asia-southeast1.firebasedatabase.app/survey/line:001.json`,
+          `https://nuxt-tutor.firebaseio.com/survey/line:0001.json`,
           this.form
         )
         .then(res => {
