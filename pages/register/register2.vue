@@ -96,8 +96,7 @@
 </template>
 
 <script>
-const REGEX_EMAIL =
-  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const REGEX_EMAIL = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const REGEX_PHONE = /^[0]([0-9]{9})*$/;
 const REGEX_NUMBER = /^[0-9]*$/;
 export default {
@@ -108,13 +107,13 @@ export default {
         phone: this.$store.getters.getRegister.phone,
         birthday: this.$store.getters.getRegister.birthday,
         company: this.$store.getters.getRegister.company,
-        position: this.$store.getters.getRegister.position,
+        position: this.$store.getters.getRegister.position
       },
       modal: false,
       emailvaldated: false,
       phonevaldated: false,
-      emailRukes: [(value) => this.emailValidator(value)],
-      phoneRukes: [(value) => this.phoneValidator(value)],
+      emailRukes: [value => this.emailValidator(value)],
+      phoneRukes: [value => this.phoneValidator(value)]
     };
   },
   methods: {
@@ -156,7 +155,7 @@ export default {
       const errors = [];
 
       const validatorField = ["email", "phone", "company", "position"];
-      validatorField.forEach((field) => {
+      validatorField.forEach(field => {
         if (this.form[field] == "") {
           validated = false;
           errors.push(`${field} can not be null`);
@@ -174,7 +173,7 @@ export default {
         this.$store.dispatch("setDialog", {
           isShow: true,
           title: "Form is error",
-          message: errors.map((error) => error + "<br/>").join(""),
+          message: errors.map(error => error + "<br/>").join("")
         });
       }
       return validated;
@@ -187,14 +186,15 @@ export default {
         this.$store.dispatch("setRegister", this.form);
         this.$axios
           .patch(
-            `https://lineliff-nuxt-default-rtdb.asia-southeast1.firebasedatabase.app/line:001/members/profile.json`,
+            `https://lineliff-nuxt-default-rtdb.asia-southeast1.firebasedatabase.app/members/line:001.json`,
             this.$store.getters.getRegister
           )
-          .then((res) => {
+          .then(res => {
             this.$router.push("/register/done");
-          });
+          })
+          .catch(e => console.log(e));
       }
-    },
-  },
+    }
+  }
 };
 </script>

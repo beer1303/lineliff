@@ -41,14 +41,14 @@
 export default {
   data() {
     return {
-      name: this.$store.getters.getRegister.firsname,
+      name: this.$store.getters.getRegister.firstname
     };
   },
   methods: {
     workshop() {
       this.$routor.push("workshop");
     },
-    close() {},
-  },
+    close() {}
+  }
 };
 </script>

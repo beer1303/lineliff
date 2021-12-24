@@ -17,8 +17,8 @@
         <v-col cols="12">
           <v-form>
             <v-text-field
-              v-model="form.firsname"
-              label="FirsName"
+              v-model="form.firstname"
+              label="FirstName"
               dense
               required
             ></v-text-field>
@@ -36,22 +36,27 @@
                 @click="chooseGender(1)"
               >
                 <svg
-                  id="svg2"
                   xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 113.29 192.76"
+                  width="21.172"
+                  height="31.883"
+                  viewBox="0 0 21.172 31.883"
                 >
                   <defs>
                     <style>
-                      .cls-1 {
+                      .a {
                         fill: #fff;
                       }
                     </style>
                   </defs>
-                  <path
-                    id="path7"
-                    class="cls-1"
-                    d="M69.53,111.9A54.09,54.09,0,0,0,97.72,95.71a55,55,0,0,0,15.57-39,56.83,56.83,0,0,0-7.39-28A53.57,53.57,0,0,0,84.74,7.5a56.59,56.59,0,0,0-56.13-.1A54.35,54.35,0,0,0,7.45,28.56l0,.05a57.07,57.07,0,0,0,.31,56.75l0,.1A54.32,54.32,0,0,0,29,106.21l.11.05a61.75,61.75,0,0,0,14.48,5.64V128H3V154H43.61v38.8H69.53V154h40.56V128H69.53V111.9ZM56.6,25.66A31.47,31.47,0,0,1,72.06,29.8l.11.05A27.28,27.28,0,0,1,83.55,41a31.89,31.89,0,0,1,4.24,15.73,30,30,0,0,1-9.16,22.14A29.71,29.71,0,0,1,56.6,88a29.78,29.78,0,0,1-22-9.11,30,30,0,0,1-9.11-22.14A31.89,31.89,0,0,1,29.69,41,27.94,27.94,0,0,1,41,29.8,32.34,32.34,0,0,1,56.6,25.66Z"
-                  />
+                  <g transform="translate(-799 -426.117)">
+                    <g transform="translate(799 426.117)">
+                      <path
+                        class="a"
+                        d="M104.075,18.069a10.6,10.6,0,1,0-8.735,3.023v3.545H92.848a1.246,1.246,0,1,0,0,2.491H95.34v3.509a1.246,1.246,0,0,0,2.492,0V27.128h2.492a1.246,1.246,0,1,0,0-2.491H97.832V21.092A10.541,10.541,0,0,0,104.075,18.069ZM90.859,16.307a8.1,8.1,0,1,1,11.454,0A8.1,8.1,0,0,1,90.859,16.307Z"
+                        transform="translate(-85.999 0)"
+                      />
+                    </g>
+                  </g>
                 </svg>
               </div>
               <p>Female</p>
@@ -61,20 +66,21 @@
                 @click="chooseGender(2)"
               >
                 <svg
-                  id="svg2"
                   xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 113.29 192.76"
+                  width="24.313"
+                  height="24.313"
+                  viewBox="0 0 24.313 24.313"
                 >
                   <defs>
                     <style>
-                      .cls-1 {
+                      .a {
                         fill: #fff;
                       }
                     </style>
                   </defs>
                   <path
-                    class="cls-1"
-                    d="M62.39,45.2l1.52,15,20.12-2-15.83,16a43,43,0,1,0-24.38,78.39h0A43,43,0,0,0,78.94,84.83l15.83-16L93,89l15,1.33,4.45-50.14ZM43.82,81.75A27.86,27.86,0,1,1,24,90,27.71,27.71,0,0,1,43.82,81.75Z"
+                    class="a"
+                    d="M24.3.882a1,1,0,0,0-.062-.25.03.03,0,0,1,0-.007h0A1.031,1.031,0,0,0,24.1.395c-.013-.017-.026-.033-.041-.048a1.034,1.034,0,0,0-.194-.175l-.006,0a1,1,0,0,0-.23-.109L23.567.04A1.01,1.01,0,0,0,23.3,0H16.209a1.013,1.013,0,0,0,0,2.026h4.645L14.808,8.073A9.123,9.123,0,1,0,16.24,9.506l6.047-6.047V8.1a1.013,1.013,0,1,0,2.026,0V1.013c0-.021,0-.042-.006-.062S24.3.905,24.3.882ZM9.118,22.287A7.1,7.1,0,1,1,16.209,15.2,7.1,7.1,0,0,1,9.118,22.287Zm0,0"
                   />
                 </svg>
               </div>
@@ -99,10 +105,10 @@ export default {
   data() {
     return {
       form: {
-        firsname: this.$store.getters.getRegister.firsname,
+        firstname: this.$store.getters.getRegister.firstname,
         lastname: this.$store.getters.getRegister.lastname,
-        gender: this.$store.getters.getRegister.gender,
-      },
+        gender: this.$store.getters.getRegister.gender
+      }
     };
   },
   methods: {
@@ -113,8 +119,8 @@ export default {
       let validated = true;
       const errors = [];
 
-      const validatorField = ["firsname", "lastname"];
-      validatorField.forEach((field) => {
+      const validatorField = ["firstname", "lastname"];
+      validatorField.forEach(field => {
         if (this.form[field] == "") {
           validated = false;
           errors.push(`${field} can not be null`);
@@ -124,7 +130,7 @@ export default {
         this.$store.dispatch("setDialog", {
           isShow: true,
           title: "Form is error",
-          message: errors.map((error) => error + "<br/>").join(""),
+          message: errors.map(error => error + "<br/>").join("")
         });
       }
       return validated;
@@ -134,8 +140,7 @@ export default {
         this.$store.dispatch("setRegister", this.form);
         this.$router.push("/register/register2");
       }
-    },
-  },
+    }
+  }
 };
 </script>
-

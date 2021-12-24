@@ -5,14 +5,13 @@
   </v-app>
 </template>
 
-
 <script lang="ts">
 import Dialog from "~/components/Dialog.vue";
 
 export default {
   components: {
-    Dialog,
-  },
+    Dialog
+  }
 };
 </script>
 
@@ -51,20 +50,20 @@ export default {
   .circle {
     width: 45px;
     height: 45px;
-    color: #fff;
+    color: rgb(255, 0, 0);
     border-radius: 50%;
     position: relative;
     background: rgba($color: #000000, $alpha: 0.3);
     margin-right: 7px;
     &.active {
-      background: #1a56be;
+      background: #1a56be !important;
     }
     svg {
       position: absolute;
-      top: 10%;
+      top: 4%;
       left: 23%;
-      transform: translate(-3%, -5%);
-      width: 23px;
+      transform: translate(-0%, -0%);
+      width: 15px;
     }
   }
 }
@@ -105,5 +104,121 @@ export default {
   position: absolute;
   bottom: 11px;
   right: 11px;
+}
+.v-card__subtitle {
+  padding: 0px;
+}
+.v-card__text {
+  padding: 0px;
+  padding-bottom: 5px;
+  h1 {
+    font-size: 24px;
+  }
+}
+.circle {
+  height: 32px !important;
+  width: 32px !important;
+  min-width: auto !important;
+  border-radius: 50%;
+  color: #fff !important;
+  background: rgba($color: #005eff, $alpha: 0.3) !important;
+  align-self: center;
+}
+.card-content {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+}
+.v-card + .v-card {
+  margin-top: 20px;
+}
+.v-card.active {
+  .circle {
+    background: rgba($color: #005eff, $alpha: 1) !important;
+  }
+  .v-image {
+    &::before {
+      content: "selected";
+      font-weight: bold;
+      font-size: 24px;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #005eff;
+      background: rgba($color: #ffffff, $alpha: 0.4) !important;
+    }
+    background: red;
+  }
+}
+.dialog-card {
+  p {
+    margin-bottom: 0;
+  }
+  .v-card__title.headline {
+    font-size: 20px !important;
+    font-weight: bold;
+  }
+  .v-card__text {
+    padding-bottom: 0;
+  }
+  .detail {
+    margin: 10px 0;
+  }
+}
+
+.v-tabs {
+  margin-bottom: 15px;
+}
+
+.v-tab {
+  color: #4d4d4d;
+  font-weight: bold;
+  background: #efefef;
+
+  &.v-tab--active {
+    color: #1a56be !important;
+  }
+
+  & + .v-tab {
+    border-left: #bdbdbd solid 1px;
+  }
+}
+
+.agenda-card {
+  color: #4d4d4d;
+
+  .time {
+    color: #1a56be;
+    font-weight: bold;
+  }
+
+  .agenda-image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  & + .agenda-card {
+    margin-top: 15px;
+  }
+
+  &.card-set {
+    border-left: 3px solid #1a56be;
+
+    .v-card__text + .v-card__text {
+      padding-top: 2 !important;
+    }
+  }
+
+  hr {
+    width: 100%;
+    margin: 10px auto 0;
+    height: 1px;
+    background: #bdbdbd;
+    border: 0;
+  }
 }
 </style>
