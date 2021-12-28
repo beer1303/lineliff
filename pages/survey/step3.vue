@@ -25,7 +25,7 @@
           >
             <h1>Of course!</h1>
             <p>Definitely i’ll join next event.</p>
-            <v-icon>check</v-icon>
+            <v-icon>mdi-check</v-icon>
           </div>
           <div
             class="select"
@@ -34,7 +34,7 @@
           >
             <h1>Not sure</h1>
             <p>Let me think again next time.</p>
-            <v-icon>check</v-icon>
+            <v-icon>mdi-check</v-icon>
           </div>
           <div
             class="select"
@@ -43,7 +43,7 @@
           >
             <h1>No, thanks</h1>
             <p>It’s not my type.</p>
-            <v-icon>check</v-icon>
+            <v-icon>mdi- check</v-icon>
           </div>
         </v-col>
         <v-col cols="10">
@@ -92,41 +92,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-.question {
-  font-size: 20px;
-}
-.select {
-  border-bottom: 1px solid #e6e6e6;
-  padding-bottom: 25px;
-  color: #707070;
-  position: relative;
-  &.select {
-    margin-top: 25px;
-  }
-  &.active {
-    color: #1a56be;
-    .v-icon {
-      color: #1a56be;
-      display: block;
-    }
-  }
-  h1 {
-    font-size: 20px;
-  }
-  p {
-    font-size: 18px;
-    margin-bottom: 0;
-  }
-  .v-icon {
-    position: absolute;
-    right: 0;
-    bottom: 25px;
-    display: none;
-  }
-}
-.mt-50 {
-  margin-top: 50px;
-}
-</style>

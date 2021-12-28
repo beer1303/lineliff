@@ -221,4 +221,63 @@ export default {
     border: 0;
   }
 }
+.question {
+  font-size: 20px;
+}
+.slider {
+  margin-top: 80px;
+  ::v-deep {
+    .v-slider__thumb {
+      height: 15px !important;
+      width: 15px !important;
+    }
+    .v-slider__thumb-label {
+      font-size: 20px;
+      width: 45px !important;
+      height: 45px !important;
+    }
+    .v-slider__track-background {
+      background: rgba($color: #000, $alpha: 0.3) !important;
+    }
+    .v-slider--horizontal .v-slider__track-container {
+      height: 4px;
+    }
+  }
+}
+
+.select {
+  border-bottom: 1px solid #e6e6e6;
+  padding-bottom: 25px;
+  color: #707070;
+  position: relative;
+  &.select {
+    margin-top: 25px;
+  }
+  &.active {
+    color: #1a56be;
+    .v-icon {
+      color: #1a56be;
+      display: block;
+    }
+  }
+  h1 {
+    font-size: 20px;
+  }
+  p {
+    font-size: 18px;
+    margin-bottom: 0;
+  }
+  .v-icon {
+    position: absolute;
+    right: 0;
+    bottom: 25px;
+    display: none;
+  }
+}
+.mt-50 {
+  margin-top: 50px;
+}
+.mt-100 {
+  margin-top: 100px;
+}
 </style>

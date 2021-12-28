@@ -53,7 +53,7 @@ export default {
       this.$store.dispatch("setSurvey", this.form);
       this.$axios
         .patch(
-          `https://nuxt-tutor.firebaseio.com/survey/line:0001.json`,
+          `https://lineliff-nuxt-default-rtdb.asia-southeast1.firebasedatabase.app/survey/line:001.json`,
           this.form
         )
         .then(res => {
@@ -64,29 +64,4 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-.question {
-  font-size: 20px;
-}
-.slider {
-  margin-top: 90px;
-  ::v-deep {
-    .v-slider__thumb {
-      height: 15px !important;
-      width: 15px !important;
-    }
-    .v-slider__thumb-label {
-      font-size: 20px;
-      width: 45px !important;
-      height: 45px !important;
-    }
-    .v-slider__track-background {
-      background: rgba($color: #000, $alpha: 0.3) !important;
-    }
-    .v-slider--horizontal .v-slider__track-container {
-      height: 4px;
-    }
-  }
-}
-</style>
+<style lang="scss" scoped></style>

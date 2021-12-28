@@ -20,7 +20,7 @@
         <v-col cols="10">
           <v-textarea
             clearable
-            clear-icon="cancel"
+            clear-icon="mdi-cancel"
             label="Comments"
             v-model="form.survey2"
             :value="form.survey2"
@@ -70,9 +70,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-.question {
-  font-size: 20px;
-}
-</style>
