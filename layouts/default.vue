@@ -41,6 +41,11 @@ export default {
 .v-form {
   padding: 0 10px;
 }
+.profile-img {
+  img {
+    border-radius: 50%;
+  }
+}
 .gender-group {
   p {
     margin-bottom: 0;
@@ -279,5 +284,66 @@ export default {
 }
 .mt-100 {
   margin-top: 100px;
+}
+
+// <<------reward-------------->>
+.name {
+  margin-left: 20px;
+  font-size: 20px;
+}
+.v-card {
+  padding: 10px 15px;
+}
+.stamp-zone {
+  background: #bdbdbd;
+  padding: 25px 25px 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.stamp {
+  flex-basis: 25%;
+}
+.circle {
+  background: #fff !important;
+  border-radius: 50%;
+  border: 2px #1a56be solid;
+  height: 55px !important;
+  width: 55px !important;
+  justify-content: center;
+  display: inline-flex;
+  margin-bottom: 30px;
+  margin-right: 10px;
+  .v-icon {
+    display: none;
+  }
+  &.active {
+    background: #1a56be;
+    span {
+      display: none;
+    }
+    .v-icon {
+      display: flex;
+      color: #fff;
+    }
+  }
+  &.end {
+    background: #1a56be !important;
+    span {
+      font-size: 16px;
+      color: #fff;
+    }
+  }
+  span {
+    align-self: center;
+    font-size: 17px;
+    color: #1a56be;
+    font-weight: bold;
+  }
+}
+.scan {
+  svg {
+    margin-right: 5px;
+  }
 }
 </style>

@@ -186,7 +186,7 @@ export default {
         this.$store.dispatch("setRegister", this.form);
         this.$axios
           .patch(
-            `https://lineliff-nuxt-default-rtdb.asia-southeast1.firebasedatabase.app/members/line:001.json`,
+            `https://lineliff-nuxt-default-rtdb.asia-southeast1.firebasedatabase.app/members/${this.$store.getters.getLine.userId}/profile.json`,
             this.$store.getters.getRegister
           )
           .then(res => {

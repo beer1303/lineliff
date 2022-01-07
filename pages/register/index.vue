@@ -6,27 +6,33 @@
     <v-container class="pt-0 pb-0">
       <v-row>
         <v-col cols="12">
-          <div class="mt-7 text-primary text-title text-center">
+          <div class="mt-8 text-primary text-title text-center">
             Step 1 of 2
           </div>
         </v-col>
-        <v-col cols="12" class="text-center pb-0">
-          <img src=~/assets/img/profile.png alt="" width="155">
+        <v-col cols="12" class="text-center pb-0 profile-img">
+          <img
+            v-if="getLine.pictureUrl == ''"
+            src="~/assets/profile.png"
+            alt=""
+            width="155"
+          />
+          <img v-else :src="getLine.pictureUrl" alt="" width="155" />
         </v-col>
-        <v-col cols="12" class="text-center pt-2 pb-0"> Display Name </v-col>
+        <v-col cols="12" class="text-center pt-2 pb-0">
+          {{ getLine.displayName }}
+        </v-col>
         <v-col cols="12">
           <v-form>
             <v-text-field
               v-model="form.firstname"
-              label="FirstName"
               dense
-              required
+              label="Firstname"
             ></v-text-field>
             <v-text-field
               v-model="form.lastname"
-              label="LastName"
               dense
-              required
+              label="Lastname"
             ></v-text-field>
             <div class="gender-group d-flex mt-3">
               <p>Gender</p>
@@ -84,7 +90,7 @@
                   />
                 </svg>
               </div>
-              <p>male</p>
+              <p>Male</p>
             </div>
             <v-btn
               rounded
@@ -92,8 +98,8 @@
               dark
               class="w-100 mt-10 my-btn"
               @click="next"
-              >Next
-            </v-btn>
+              >Next</v-btn
+            >
           </v-form>
         </v-col>
       </v-row>
@@ -102,6 +108,27 @@
 </template>
 <script>
 export default {
+  mounted() {
+    liff
+      .init({
+        liffId: "1656783763-27oy5YDB"
+      })
+      .then(() => {
+        if (liff.isLoggedIn()) {
+          liff.getProfile().then(profile => {
+            this.$store.dispatch("setLine", profile);
+            this.isDone();
+          });
+        } else {
+          liff.login();
+        }
+      });
+  },
+  computed: {
+    getLine() {
+      return this.$store.getters.getLine;
+    }
+  },
   data() {
     return {
       form: {
@@ -112,6 +139,17 @@ export default {
     };
   },
   methods: {
+    isDone() {
+      this.$axios
+        .get(
+          `https://lineliff-nuxt-default-rtdb.asia-southeast1.firebasedatabase.app/members/${this.$store.getters.getLine.userId}/profile.json`
+        )
+        .then(res => {
+          if (res.data != null) {
+            this.$router.push("register/done");
+          }
+        });
+    },
     chooseGender(gender) {
       this.form.gender = gender;
     },
