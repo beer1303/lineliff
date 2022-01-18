@@ -173,6 +173,7 @@ export default {
       }
       return validated;
     },
+
     next() {
       if (this.validdate()) {
         this.$store.dispatch("setRegister", this.form);
